@@ -16,7 +16,7 @@
 
 ### 使用方法
 
-1. 在 OBS 中新增一浏览器源，**置于最上层**。URL 填入 https://obs-earthquake.kotori.moe/ ，宽高设定为 1920x1080，如下图所示。
+1. 在 OBS 中新增一浏览器源，**置于最上层**。URL 填入 http://obs-earthquake.kotori.moe/ ，宽高设定为 1920x1080，如下图所示。
 
 ![OBS 设置示意](./images/obs-settings.png)
 
