@@ -82,27 +82,6 @@ body {
 }
 </style>
 <script>
-const testEvent = {
-    publisher: "jma",
-    data: {
-        title: "震中信息",
-        content:
-            "今天13日23时08分左右，发生了地震。\n震中: 福島県沖\n深度: 60km 震级: M7.1\n\n本次地震可能造成一定的海平面变化，但是不会造成灾害性海啸。\n",
-        link: "https://s.wug.moe",
-        epicenter: {
-            earth_quake_time: "2021-02-13 23:07",
-            epicenter: "福島県沖",
-            epicenter_code: "289",
-            magnitude: "7.1",
-            depth: 60,
-            coordinate: [37.7, 141.8],
-        },
-        comments: {
-            forecast_comment:
-                "この地震により、日本の沿岸では若干の海面変動があるかもしれませんが、被害の心配はありません。",
-        },
-    },
-};
 const ShindoTextMap = {
     1: "震度1",
     2: "震度2",
@@ -142,13 +121,13 @@ export default {
             this.isShowTitle = true;
             await sleep(2000);
             this.isShowTitle = false;
-            if (event.publisher === "shindo_early_report") {
+            if (event.spiderName === "shindo_early_report") {
                 this.earthquakeInfo = [event.data.content.split("\n")[0]];
                 this.isShowEarthquakeInfo = true;
                 await sleep(5000);
                 this.isShowEarthquakeInfo = false;
             }
-            if (event.publisher === "shindo_report") {
+            if (event.spiderName === "shindo_report") {
                 const parsedContent = event.data.content
                     .replace(/\n\n/gi, "\n")
                     .split("\n")
@@ -162,7 +141,7 @@ export default {
                 await sleep(5000);
                 this.isShowEarthquakeInfo = false;
             }
-            if (event.publisher === "jma" && event.data.title === "震中信息") {
+            if (event.spiderName === "jma" && event.data.title === "震中信息") {
                 const parsedContent = event.data.content
                     .replace(/\n\n/gi, "\n")
                     .split("\n")
@@ -228,9 +207,9 @@ export default {
         },
         onEventMessage(event) {
             if (
-                event.publisher === "shindo_report" ||
-                event.publisher === "shindo_early_report" ||
-                (event.publisher === "jma" && event.data.title === "震中信息")
+                event.spiderName === "shindo_report" ||
+                event.spiderName === "shindo_early_report" ||
+                (event.spiderName === "jma" && event.data.title === "震中信息")
             ) {
                 this.showEvent(event);
             }
