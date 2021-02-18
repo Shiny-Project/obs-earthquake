@@ -216,7 +216,9 @@ export default {
         },
     },
     async mounted() {
-        this.socketClient = io("http://websocket.shiny.kotori.moe:3737");
+        this.socketClient = io("http://websocket.shiny.kotori.moe:3737", {
+            reconnect: true,
+        });
         this.socketClient.on("event", async (data) => {
             // 尝试按JSON解析
             let event;
