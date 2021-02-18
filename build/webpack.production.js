@@ -26,5 +26,5 @@ module.exports = {
             template: path.resolve(__dirname, "./template.html"),
         }),
     ],
-    mode: "development",
+    mode: "production",
 };
